@@ -18,5 +18,7 @@ class UserTableSeeder extends Seeder
             'created_at' => time(),
             'updated_at' => time(),
         ]);
+
+        factory(App\User::class, 30)->create();
     }
 }
