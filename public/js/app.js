@@ -1,45 +1,75 @@
-(function(){
-    var app = angular.module('tutapos', [ ]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
 
-    app.controller("SearchItemCtrl", [ '$scope', '$http', function($scope, $http) {
-        $scope.items = [ ];
-        $http.get('api/item').success(function(data) {
-            $scope.items = data;
-        });
-        $scope.receivingtemp = [ ];
-        $scope.newreceivingtemp = { };
-        $http.get('api/receivingtemp').success(function(data, status, headers, config) {
-            $scope.receivingtemp = data;
-        });
-        $scope.addReceivingTemp = function(item,newreceivingtemp) {
-            $http.post('api/receivingtemp', { item_id: item.id, cost_price: item.cost_price, total_cost: item.cost_price, type: item.type }).
-            success(function(data, status, headers, config) {
-                $scope.receivingtemp.push(data);
-                    $http.get('api/receivingtemp').success(function(data) {
-                    $scope.receivingtemp = data;
-                    });
-            });
-        }
-        $scope.updateReceivingTemp = function(newreceivingtemp) {
-            $http.put('api/receivingtemp/' + newreceivingtemp.id, { quantity: newreceivingtemp.quantity, total_cost: newreceivingtemp.item.cost_price * newreceivingtemp.quantity }).
-            success(function(data, status, headers, config) {
-                });
-        }
-        $scope.removeReceivingTemp = function(id) {
-            $http.delete('api/receivingtemp/' + id).
-            success(function(data, status, headers, config) {
-                $http.get('api/receivingtemp').success(function(data) {
-                        $scope.receivingtemp = data;
-                        });
-                });
-        }     
-        $scope.sum = function(list) {
-            var total=0;
-            angular.forEach(list , function(newreceivingtemp){
-                total+= parseFloat(newreceivingtemp.item.cost_price * newreceivingtemp.quantity);
-            });
-            return total;
-        }
+(function webpackMissingModule() { throw new Error("Cannot find module \"H:\\laravel\\L5-Pos\\resources\\assets\\js\\app.js\""); }());
+(function webpackMissingModule() { throw new Error("Cannot find module \"H:\\laravel\\L5-Pos\\resources\\assets\\sass\\app.scss\""); }());
 
-    }]);
-})();
+
+/***/ })
+/******/ ]);

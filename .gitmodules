@@ -1,0 +1,3 @@
+[submodule "resources/views/laravel-main-views"]
+	path = resources/views/laravel-main-views
+	url = https://github.com/xentyo/laravel-main-views

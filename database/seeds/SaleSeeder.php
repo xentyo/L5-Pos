@@ -44,6 +44,8 @@ class SaleSeeder extends Seeder
         $sale->user()->associate($seller);
         $sale->customer()->associate($customer);
         $sale->save();
+        $sale->created_at = $this->getRandomTimestamps()['created_at'];
+        $sale->save();
         $saleItemsCount = mt_rand(1, 10);
         for ($q=0; $q < $saleItemsCount; $q++) {
           $item = $items[mt_rand(0, $itemsCount - 1)];
@@ -62,4 +64,22 @@ class SaleSeeder extends Seeder
         }
       }
     }
+
+    function getRandomTimestamps($backwardDays = null)
+  	{
+  		if ( is_null($backwardDays) )
+  		{
+  			$backwardDays = -800;
+  		}
+
+  		$backwardCreatedDays = rand($backwardDays, 0);
+  		$backwardUpdatedDays = rand($backwardCreatedDays + 1, 0);
+
+  		return [
+  			'created_at' => \Carbon\Carbon::now()->addDays($backwardCreatedDays)->addMinutes(rand(0,
+  				60 * 23))->addSeconds(rand(0, 60)),
+  			'updated_at' => \Carbon\Carbon::now()->addDays($backwardUpdatedDays)->addMinutes(rand(0,
+  				60 * 23))->addSeconds(rand(0, 60))
+  		];
+  	}
 }

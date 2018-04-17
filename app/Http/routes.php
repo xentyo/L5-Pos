@@ -55,6 +55,9 @@ Route::group(['middleware' => 'languange'], function()
 
 	Route::resource('tutapos-settings', 'TutaposSettingController');
 });
+
+Route::get('/reports/graphs', "SaleReportController@graphs");
+Route::get('/api/sales/report/{datetime}', "SaleReportController@apiReport");
 /*
 Route::group(['middleware' => 'role'], function()
     {
@@ -64,7 +67,7 @@ Route::group(['middleware' => 'role'], function()
         });
     });
 
-Route::get('sales', [  
+Route::get('sales', [
     'middleware' => 'role',
     'uses' => 'SaleController@index'
 ]);
