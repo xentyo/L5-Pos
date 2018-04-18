@@ -29,12 +29,24 @@ class ReportApiController extends Controller
     return $salesByHour;
   }
 
-  public function saleBySeller(){
+  public function saleBySeller(Request $request){
     $sellers = Seller::all();
+    $rank = [];
     foreach ($sellers as $key => $seller) {
-      $seller->sales;
+      $rank[] = [
+        'name' => $seller->name,
+        'email' => $seller->email,
+        'sales' => count($seller->sales)
+      ];
     }
 
-    return $sellers;
+    $collection = collect($rank)->sortBy('sales')->reverse();
+
+    if($request->has('top')){
+      return $collection->chunk($request->get('top'))->toArray()[0];
+    }
+    return $collection->toArray();
   }
+
+
 }

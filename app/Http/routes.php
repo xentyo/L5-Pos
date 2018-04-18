@@ -35,7 +35,7 @@ Route::group(['middleware' => 'languange'], function()
 	Route::resource('inventory', 'InventoryController');
 	Route::resource('suppliers', 'SupplierController');
 	Route::resource('receivings', 'ReceivingController');
-	Route::resource('receiving-item', 'ReceivingItemController');
+	// Route::resource('receiving-item', 'ReceivingItemController');
 	Route::resource('sales', 'SaleController');
 
 	Route::resource('reports/receivings', 'ReceivingReportController');
@@ -58,6 +58,7 @@ Route::group(['middleware' => 'languange'], function()
 
 Route::get('/reports/graphs', "SaleReportController@graphs");
 Route::get('/api/sales/report/daily', "ReportApiController@dailySales");
+Route::get('/api/sellers/report/rank', 'ReportApiController@saleBySeller');
 /*
 Route::group(['middleware' => 'role'], function()
     {
