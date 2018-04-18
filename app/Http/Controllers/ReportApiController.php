@@ -39,13 +39,34 @@ class ReportApiController extends Controller
         'sales' => count($seller->sales)
       ];
     }
-
     $collection = collect($rank)->sortBy('sales')->reverse();
-
-    if($request->has('top')){
-      return $collection->chunk($request->get('top'))->toArray()[0];
-    }
+    if($request->has('top')) return $collection->chunk($request->get('top'))->toArray()[0];
     return $collection->toArray();
+  }
+
+  public function monthly($year){
+    $from = new Carbon();
+    $from->year = $year;
+    $to = new Carbon($from);
+    $to->year += 1;
+    $to->month -= 1;
+    $sales = Sale:: whereBetween('created_at', [$from, $to])
+                  ->orderBy('created_at', 'ASC')
+                  ->get()
+                  ->groupBy(function($sale){
+                    return Carbon::parse($sale->created_at)->format('Y F');
+                  });
+    $relation = [];
+    foreach ($sales as $key => $sale) {
+      $relation[] = [
+        'date' => $key,
+        'sales'=> count($sale)
+      ];
+    }
+    return $relation;
+  }
+
+  public function saleYearsRange(){
   }
 
 

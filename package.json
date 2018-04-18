@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "bootstrap-select": "^1.12.4",
         "chart.js": "^2.7.2",
         "color": "^3.0.0",
         "random-color": "^1.0.1"

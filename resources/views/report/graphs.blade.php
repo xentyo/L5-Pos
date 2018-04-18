@@ -14,13 +14,13 @@
 @endsection
 
 @section('content')
-  <div class="graph col-md-4">
-    <h1>Daily Sales</h1>
+  <div class="graph col-md-6">
+    <h1 class="text-center">Daily Sales</h1>
     <div class="col-md-12">
       <canvas id="daily-sales"></canvas>
     </div>
   </div>
-  <div class="graph col-md-8">
+  <div class="graph col-md-6">
     <h1 class="text-center">Sellers Rank</h1>
     <div class="col-md-8 col-md-offset-2 text-center">
       <div id="top-5" class="btn btn-primary"><span>Top 5</span></div>
@@ -32,7 +32,17 @@
       <canvas id="rank-sellers"></canvas>
     </div>
   </div>
-  <div class="graph col-md-4">
+  <div class="graph col-md-6">
     <h1>Sales by month</h1>
+    <div class="col-md-12">
+      <select class="selectpicker" id="year-selector">
+        @for ($i=intval($saleYears['max']->format('Y')); $i >= intval($saleYears['min']->format('Y')); $i--)
+          <option value="{!!$i!!}">{!!$i!!}</option>
+        @endfor
+      </select>
+    </div>
+    <div class="col-md-12">
+      <canvas id="monthly-sales"></canvas>
+    </div>
   </div>
 @endsection

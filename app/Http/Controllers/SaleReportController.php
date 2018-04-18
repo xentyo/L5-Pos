@@ -90,6 +90,12 @@ class SaleReportController extends Controller {
 	}
 
 	public function graphs(){
-		return view('report.graphs');
+		$saleYears = [
+			'min' => new Carbon(Sale::orderBy('created_at', 'ASC')->first()->created_at),
+			'max' => new Carbon(Sale::orderBy('created_at', 'DESC')->first()->created_at)
+		];
+		return view('report.graphs', [
+			'saleYears' => $saleYears
+		]);
 	}
 }
