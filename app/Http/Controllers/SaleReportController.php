@@ -92,24 +92,4 @@ class SaleReportController extends Controller {
 	public function graphs(){
 		return view('report.graphs');
 	}
-
-	public function apiReport(Request $request, $time){
-		if(strcmp($time, 'daily') == 0){
-			$currentDate = new Carbon();
-			$sales = Sale::where('created_at', '>', $currentDate->subDays(1))->get()->pluck('created_at')
-			->groupBy('hour')->toArray();
-			$salesByHour = [];
-			$salesGroup = null;
-			foreach ($sales as $key => $salesGroup) {
-				$salesGroup = [
-					'label' => Carbon::create(0,0,0,$key,0,0, 'America/Tijuana')->format('H:m'),
-					'count' => count($salesGroup)
-				];
-				array_push($salesByHour, $salesGroup);
-			}
-			return $salesByHour;
-		}
-
-		return [];
-	}
 }

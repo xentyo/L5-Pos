@@ -57,7 +57,7 @@ Route::group(['middleware' => 'languange'], function()
 });
 
 Route::get('/reports/graphs', "SaleReportController@graphs");
-Route::get('/api/sales/report/{datetime}', "SaleReportController@apiReport");
+Route::get('/api/sales/report/daily', "ReportApiController@dailySales");
 /*
 Route::group(['middleware' => 'role'], function()
     {
